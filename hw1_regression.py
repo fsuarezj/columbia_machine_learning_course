@@ -7,11 +7,19 @@ X_train = np.genfromtxt(sys.argv[3], delimiter = ",")
 y_train = np.genfromtxt(sys.argv[4])
 X_test = np.genfromtxt(sys.argv[5], delimiter = ",")
 
+print(X_train.shape)
+
 ## Solution for Part 1
 def part1():
     ## Input : Arguments to the function
     ## Return : wRR, Final list of values to write in the file
-    pass
+    lambda_mat = lambda_input*np.identity(X_train.shape[1])
+    X_transpose = np.transpose(X_train)
+    X_prod = np.matmul(X_transpose, X_train)
+    first_term = np.linalg.matrix_power(lambda_mat + X_prod, -1)
+    sec_term = np.matmul(first_term, X_transpose)
+    result = np.matmul(sec_term, y_train)
+    return result
 
 wRR = part1()  # Assuming wRR is returned from the function
 np.savetxt("wRR_" + str(lambda_input) + ".csv", wRR, delimiter="\n") # write output to file
