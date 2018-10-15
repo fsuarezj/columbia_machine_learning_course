@@ -105,3 +105,6 @@ venv.bak/
 
 # virtualdevwrapper
 .project
+
+# data
+data/
